@@ -1,15 +1,23 @@
+
+
 public class Cars {
-  private Long id_cars;
+  private int id_cars;
   private String name;
   private String year;
-  private Long course;
+  private double course;
   private String warnings;
-
-  public Long getId_cars() {
+public Cars(String name,String year, double course,String warnings){
+  super();
+  this.name=name;
+  this.year=year;
+  this.course=course;
+  this.warnings=warnings;
+}
+  public int getId_cars() {
     return id_cars;
   }
 
-  public void setId_cars(Long id_cars) {
+  public void setId_cars(int id_cars) {
     this.id_cars = id_cars;
   }
 
@@ -29,11 +37,11 @@ public class Cars {
     this.year = year;
   }
 
-  public Long getCourse() {
+  public double getCourse() {
     return course;
   }
 
-  public void setCourse(Long course) {
+  public void setCourse(double course) {
     this.course = course;
   }
 

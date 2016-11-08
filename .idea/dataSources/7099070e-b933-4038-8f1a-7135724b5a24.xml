@@ -26,7 +26,7 @@
       <DataType>year(4)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="13" parent="8" name="Course">
+    <column id="13" parent="8" name="course">
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
@@ -53,14 +53,14 @@
       <DataType>double|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="20" parent="9" name="distance(km)">
+    <column id="20" parent="9" name="distance">
       <DataType>double|0</DataType>
       <NotNull>1</NotNull>
     </column>
     <column id="21" parent="9" name="cars_id">
       <DataType>int(11)|0</DataType>
     </column>
-    <index id="22" parent="9" name="run_cars_id_cars_fk">
+    <index id="22" parent="9" name="cars_id">
       <ColNames>cars_id</ColNames>
     </index>
     <key id="23" parent="9" name="PRIMARY">
@@ -74,6 +74,12 @@
       <RefColNames>id_cars</RefColNames>
       <OnUpdate>update</OnUpdate>
       <OnDelete>set-null</OnDelete>
+    </foreign-key>
+    <foreign-key id="25" parent="9" name="run_ibfk_1">
+      <ColNames>cars_id</ColNames>
+      <RefSchemaName>firma_transportowa</RefSchemaName>
+      <RefTableName>cars</RefTableName>
+      <RefColNames>id_cars</RefColNames>
     </foreign-key>
   </database-model>
 </dataSource>

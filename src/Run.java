@@ -6,6 +6,7 @@ public class Run {
   private Double price;
   private Double distance;
   private int cars_id;
+  public  Run(){}
 public Run(String name,String warnings,double price, double distance,int cars_id){
   super();
   this.name=name;
@@ -14,6 +15,13 @@ public Run(String name,String warnings,double price, double distance,int cars_id
   this.distance=distance;
   this.cars_id=cars_id;
 }
+  public Run(String name,String warnings,double price, double distance){
+    super();
+    this.name=name;
+    this.warnings=warnings;
+    this.price=price;
+    this.distance=distance;
+  }
   public int getId_run() {
     return id_run;
   }

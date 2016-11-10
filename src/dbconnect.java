@@ -30,7 +30,8 @@ public class dbconnect {
     private PreparedStatement AddCarToRun;
 
     private PreparedStatement DeleteCarToRun;
-
+    private PreparedStatement dropTableCars;
+    private PreparedStatement dropTableRun;
     public dbconnect() {
         try {
             Class.forName(DB_DRIVER);
@@ -44,14 +45,15 @@ public class dbconnect {
             createTable();
             insertRun= Conn.prepareStatement("insert INTO run(name, distance, price, warnings, cars_id) VALUES (?,?,?,?,?);");
             insertCars= Conn.prepareStatement("insert INTO cars(name, year,  course, warnings) VALUES (?,?,?,?);");
-            deleteCars=Conn.prepareStatement("DELETE FROM cars WHERE  '?'=?");
-            deleteRun=Conn.prepareStatement("DELETE FROM  run WHERE   cars_id =?");
-            ViewCars = Conn.prepareStatement("Select * FROM cars");
-             ViewRun= Conn.prepareStatement("Select * FROM run");
-             AddCarToRun = Conn.prepareStatement("UPDATE run SET cars_id= ? WHERE id_run=?");
-           DeleteCarToRun = Conn.prepareStatement("UPDATE run SET cars_id= NULL WHERE cars_id=?");
-            ViewRunWithCar = Conn.prepareStatement("Select * FROM run where cars_id=?");
-
+            deleteCars=Conn.prepareStatement("DELETE FROM cars WHERE  '?'=?;");
+            deleteRun=Conn.prepareStatement("DELETE FROM  run WHERE   cars_id =?;");
+            ViewCars = Conn.prepareStatement("Select * FROM cars;");
+             ViewRun= Conn.prepareStatement("Select * FROM run;");
+             AddCarToRun = Conn.prepareStatement("UPDATE run SET cars_id= ? WHERE id_run=?;");
+           DeleteCarToRun = Conn.prepareStatement("UPDATE run SET cars_id= NULL WHERE cars_id=?;");
+            ViewRunWithCar = Conn.prepareStatement("Select * FROM run where cars_id=?;");
+            dropTableCars = Conn.prepareStatement("Drop table if EXISTS cars;");
+            dropTableRun = Conn.prepareStatement("Drop table if EXISTS run;");
         }
         catch (SQLException e){
             e.printStackTrace();
@@ -69,7 +71,7 @@ public class dbconnect {
                     "id_run  INT NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
                     "name VARCHAR(255) NOT NULL, " +
                     "price double NOT NULL, " +
-                    "cars_id int NOT NULL," +
+                    "cars_id int ," +
                     "distance double NOT NULL," +
                     "warnings VARCHAR(255))";
             String alterTableRun= "ALTER TABLE run ADD FOREIGN KEY (cars_id) REFERENCES cars(id_cars)";
@@ -238,8 +240,19 @@ public class dbconnect {
         }
         return true;
     }
-
+    public  boolean dropTable(){
+        try {
+            dropTableRun.execute();
+            dropTableCars.execute();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
+
+}
 
 
 
